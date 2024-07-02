@@ -1,5 +1,5 @@
 "use server";
-import { db } from "@/libs";
+import { db } from "@/libs/db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

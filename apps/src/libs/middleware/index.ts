@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/libs";
+import { db } from "@/libs/db";
 
 export async function checkSession(req: NextRequest) {
   let res = NextResponse.next({
