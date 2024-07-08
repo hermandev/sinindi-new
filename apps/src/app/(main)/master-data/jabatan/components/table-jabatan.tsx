@@ -1,4 +1,4 @@
-import { Jabatan, Pangkat } from "@/libs/db/types";
+import { Jabatan } from "@/libs/db/types";
 import { Paper, Text } from "@mantine/core";
 import { useEffect, useState, useTransition } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
