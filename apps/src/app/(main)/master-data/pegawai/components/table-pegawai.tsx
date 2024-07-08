@@ -1,8 +1,9 @@
 import { Pegawai } from "@/libs/db/types";
-import { Paper, Text } from "@mantine/core";
+import { ActionIcon, Group, Paper, Text, Tooltip, rem } from "@mantine/core";
 import React, { useEffect, useState, useTransition } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { getDataPegawai } from "../actions";
+import { IconEdit, IconRefresh } from "@tabler/icons-react";
 
 function TablePegawai() {
   const [data, setData] = useState([]);
@@ -47,6 +48,22 @@ function TablePegawai() {
     {
       name: "Action",
       width: "100px",
+      center: true,
+      cell: (row: Pegawai) => (
+        <ActionIcon.Group>
+          <Tooltip label="Reset Password" withArrow>
+            <ActionIcon variant="light" color="pink" aria-label="Reset">
+              <IconRefresh style={{ width: rem(20) }} stroke={1.5} />
+            </ActionIcon>
+          </Tooltip>
+
+          <Tooltip label="Edit Data" withArrow>
+            <ActionIcon variant="light" color="orange" aria-label="Edit">
+              <IconEdit style={{ width: rem(20) }} stroke={1.5} />
+            </ActionIcon>
+          </Tooltip>
+        </ActionIcon.Group>
+      ),
     },
   ];
   return (

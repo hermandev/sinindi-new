@@ -1,8 +1,9 @@
 import { Golongan } from "@/libs/db/types";
-import { Paper, Text } from "@mantine/core";
+import { ActionIcon, Paper, Text, Tooltip, rem } from "@mantine/core";
 import { useEffect, useState, useTransition } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { getDataGolongan } from "../actions";
+import { IconEdit } from "@tabler/icons-react";
 
 function TableGolongan() {
   const [data, setData] = useState([]);
@@ -28,6 +29,14 @@ function TableGolongan() {
     {
       name: "Action",
       width: "100px",
+      center: true,
+      cell: (row) => (
+        <Tooltip label="Edit Data" withArrow>
+          <ActionIcon variant="light" color="orange" aria-label="Edit">
+            <IconEdit style={{ width: rem(20) }} stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
+      ),
     },
   ];
   return (
