@@ -9,6 +9,15 @@ export async function checkSession(req: NextRequest) {
     },
   });
 
+  if (req.nextUrl.pathname === "/login") {
+    db.authStore.loadFromCookie(cookies().toString());
+    if (db.authStore.isValid) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    return res;
+  }
+
   const cookie = cookies();
   const request_cookie = cookie.get("pb_auth");
   if (request_cookie && request_cookie.value !== "") {

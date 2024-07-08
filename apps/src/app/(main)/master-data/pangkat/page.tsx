@@ -1,7 +1,8 @@
 import React from "react";
+import PangkatContainer from "./components/container";
 
 function PangkatPage() {
-  return <div>PangkatPage</div>;
+  return <PangkatContainer />;
 }
 
 export default PangkatPage;

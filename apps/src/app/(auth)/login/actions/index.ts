@@ -3,7 +3,18 @@ import { db } from "@/libs/db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function authLogin(username: string, password: string) {
+/**
+ * Melakukan Login User
+ * @param {string} username, password - username atau email user
+ * @returns {Object}
+ */
+export async function userLogin({
+  username,
+  password,
+}: {
+  username: string;
+  password: string;
+}): Promise<string> {
   const result = await new Promise((resolve, _) => {
     db.collection("users")
       .authWithPassword(username, password)
@@ -20,7 +31,11 @@ export async function authLogin(username: string, password: string) {
   return JSON.stringify(result);
 }
 
-export async function logOut() {
+/**
+ * User LogOut
+ * @returns {void}
+ */
+export async function logOut(): Promise<void> {
   db.authStore.clear();
   cookies().delete("pb_auth");
   redirect("/login");

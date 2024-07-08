@@ -1,7 +1,17 @@
-import React from "react";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
-function LoginPage() {
-  return <div>LoginPage</div>;
+export const metadata: Metadata = {
+  title: "SININDI | Login",
+  description: "Login - SININDI",
+};
+
+const FormLogin = dynamic(() => import("./components/form-login"), {
+  ssr: false,
+});
+
+async function LoginPage() {
+  return <FormLogin />;
 }
 
 export default LoginPage;

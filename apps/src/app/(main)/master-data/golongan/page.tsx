@@ -1,7 +1,8 @@
 import React from "react";
+import GolonganContainer from "./components/container";
 
 function GolonganPage() {
-  return <div>GolonganPage</div>;
+  return <GolonganContainer />;
 }
 
 export default GolonganPage;

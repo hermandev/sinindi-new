@@ -1,0 +1,40 @@
+.wrapper {
+  min-height: rem(100vh);
+  position: relative;
+  background-color: var(--mantine-color-gray-light);
+}
+
+.heroImg {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.form {
+  border-right: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+  min-height: rem(100vh);
+  min-width: 30%;
+  max-width: 30%;
+  padding-top: rem(80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
+}

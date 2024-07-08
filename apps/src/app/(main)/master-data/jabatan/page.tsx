@@ -1,7 +1,8 @@
 import React from "react";
+import JabatanContainer from "./components/container";
 
 function JabatanPage() {
-  return <div>JabatanPage</div>;
+  return <JabatanContainer />;
 }
 
 export default JabatanPage;
