@@ -12,6 +12,7 @@
     "@mantine/core": "^7.10.2",
     "@mantine/form": "^7.10.2",
     "@mantine/hooks": "^7.10.2",
+    "@reduxjs/toolkit": "^2.2.6",
     "@tabler/icons-react": "^3.6.0",
     "add": "^2.0.6",
     "next": "14.2.4",
@@ -19,6 +20,7 @@
     "react": "^18",
     "react-data-table-component": "^7.6.2",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "styled-components": "^6.1.11",
     "zod": "^3.23.8"
   },
