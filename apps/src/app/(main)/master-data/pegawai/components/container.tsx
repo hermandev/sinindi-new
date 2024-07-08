@@ -11,8 +11,11 @@ import {
 import React from "react";
 import TablePegawai from "./table-pegawai";
 import { IconPlus } from "@tabler/icons-react";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { modalAddPegawai } from "@/libs/redux/reducers/master-data-slice";
 
 function PegawaiContainer() {
+  const dispatch = useAppDispatch();
   return (
     <>
       <SimpleGrid p="md">
@@ -23,7 +26,12 @@ function PegawaiContainer() {
               Master Data Pegawai
             </Text>
           </Box>
-          <Button leftSection={<IconPlus size="1rem" />}>Tambah</Button>
+          <Button
+            leftSection={<IconPlus size="1rem" />}
+            onClick={() => dispatch(modalAddPegawai(true))}
+          >
+            Tambah
+          </Button>
         </Group>
       </SimpleGrid>
       <Divider />
