@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import TablePegawai from "./table-pegawai";
+import { IconPlus } from "@tabler/icons-react";
 
 function PegawaiContainer() {
   return (
@@ -22,7 +23,7 @@ function PegawaiContainer() {
               Master Data Pegawai
             </Text>
           </Box>
-          <Button>Tambah</Button>
+          <Button leftSection={<IconPlus size="1rem" />}>Tambah</Button>
         </Group>
       </SimpleGrid>
       <Divider />

@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import TablePangkat from "./table-pangkat";
+import { IconPlus } from "@tabler/icons-react";
 
 function PangkatContainer() {
   return (
@@ -22,7 +23,7 @@ function PangkatContainer() {
               Master Data Pangkat
             </Text>
           </Box>
-          <Button>Tambah</Button>
+          <Button leftSection={<IconPlus size="1rem" />}>Tambah</Button>
         </Group>
       </SimpleGrid>
       <Divider />

@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import TablePangkat from "./table-golongan";
+import { IconPlus } from "@tabler/icons-react";
 
 function GolonganContainer() {
   return (
@@ -22,7 +23,7 @@ function GolonganContainer() {
               Master Data Golongan
             </Text>
           </Box>
-          <Button>Tambah</Button>
+          <Button leftSection={<IconPlus size="1rem" />}>Tambah</Button>
         </Group>
       </SimpleGrid>
       <Divider />

@@ -1,7 +1,8 @@
 import React from "react";
+import VerifikasiContainer from "./components/container";
 
 function VerifikasiPage() {
-  return <div>VerifikasiPage</div>;
+  return <VerifikasiContainer />;
 }
 
 export default VerifikasiPage;
