@@ -13,6 +13,30 @@ export async function getDataPegawai() {
   return result;
 }
 
+export async function checkNipPegawai(nip: string) {
+  try {
+    db.authStore.loadFromCookie(cookies().toString());
+    const result = await db
+      .collection("pegawai")
+      .getFirstListItem(`nip="${nip}"`, {});
+    return JSON.stringify({ error: false, data: result });
+  } catch (error) {
+    return JSON.stringify({ error: true, data: error });
+  }
+}
+
+export async function checkNrpPegawai(nrp: string) {
+  try {
+    db.authStore.loadFromCookie(cookies().toString());
+    const result = await db
+      .collection("pegawai")
+      .getFirstListItem(`nrp="${nrp}"`, {});
+    return JSON.stringify({ error: false, data: result });
+  } catch (error) {
+    return JSON.stringify({ error: true, data: error });
+  }
+}
+
 export async function tambahPegawai(data: {
   nip: string;
   nrp: string;
@@ -48,8 +72,12 @@ export async function tambahPegawai(data: {
     });
 
     revalidatePath("/master-data/pegawai");
-    return JSON.stringify(result);
+    return JSON.stringify({ error: false, message: "Success", data: result });
   } catch (error) {
-    return JSON.stringify(error);
+    return JSON.stringify({
+      error: true,
+      message: "NIP Atau NRP Sudah terdaftar",
+      data: error,
+    });
   }
 }

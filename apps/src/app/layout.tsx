@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/components/providers/redux-provider";
 import ModalProvider from "@/components/providers/modal-provider";
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <MantineProvider>
+            <Notifications />
             <ModalProvider>{children}</ModalProvider>
           </MantineProvider>
         </ReduxProvider>

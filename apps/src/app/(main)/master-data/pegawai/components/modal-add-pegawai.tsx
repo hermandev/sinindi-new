@@ -3,6 +3,7 @@ import {
   Button,
   ComboboxItem,
   Group,
+  Loader,
   Modal,
   OptionsFilter,
   Select,
@@ -16,7 +17,9 @@ import { getDataPangkat } from "../../pangkat/actions";
 import { getDataJabatan } from "../../jabatan/actions";
 import { getDataGolongan } from "../../golongan/actions";
 import { IconDeviceFloppy } from "@tabler/icons-react";
-import { tambahPegawai } from "../actions";
+import { checkNipPegawai, checkNrpPegawai, tambahPegawai } from "../actions";
+import { useDebouncedValue } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 
 type Props = {
   opened: boolean;
@@ -37,6 +40,8 @@ const PegawaiSchema = z.object({
 function ModalAddPegawai({ opened, close }: Props) {
   const [loadSubmit, transitionSubmit] = useTransition();
   const [_, transitionFetch] = useTransition();
+  const [loadCheckNip, transitionCheckNip] = useTransition();
+  const [loadCheckNrp, transitionCheckNrp] = useTransition();
   const [dataPangkat, setDataPangkat] = useState<Pangkat[]>([]);
   const [dataJabatan, setDataJabatan] = useState<Jabatan[]>([]);
   const [dataGolongan, setDataGolongan] = useState<Golongan[]>([]);
@@ -55,8 +60,10 @@ function ModalAddPegawai({ opened, close }: Props) {
     validate: zodResolver(PegawaiSchema),
   });
 
+  const [checkNip] = useDebouncedValue(form.getInputProps("nip").value, 500);
+  const [checkNrp] = useDebouncedValue(form.getInputProps("nrp").value, 500);
+
   const handleSubmit = (data: z.infer<typeof PegawaiSchema>) => {
-    console.log(data);
     transitionSubmit(async () => {
       let username: string = "";
       if (data.nip === "-") {
@@ -83,7 +90,22 @@ function ModalAddPegawai({ opened, close }: Props) {
         }),
       );
 
-      console.log("Result = ", result);
+      if (!result.error) {
+        notifications.show({
+          title: "Success",
+          message: "Data Pegawai berhasil di daftarkan",
+          color: "teal",
+          autoClose: 2000,
+        });
+        close();
+      } else {
+        notifications.show({
+          title: "Opps!",
+          message: "Terjadi keslahan saat mengirim data",
+          color: "red",
+          autoClose: 2000,
+        });
+      }
     });
   };
 
@@ -119,10 +141,46 @@ function ModalAddPegawai({ opened, close }: Props) {
     });
   };
 
+  const handleCheckNip = (nip: string) => {
+    transitionCheckNip(async () => {
+      const result = JSON.parse(await checkNipPegawai(nip));
+      if (!result.error) {
+        form.setErrors({
+          nip: "NIP sudah terdaftar",
+        });
+      }
+    });
+  };
+
+  const handleCheckNrp = (nrp: string) => {
+    transitionCheckNrp(async () => {
+      const result = JSON.parse(await checkNrpPegawai(nrp));
+      if (!result.error) {
+        form.setErrors({
+          nrp: "NRP sudah terdaftar",
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opened]);
+
+  useEffect(() => {
+    if (checkNip !== "") {
+      handleCheckNip(checkNip);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkNip]);
+
+  useEffect(() => {
+    if (checkNrp !== "") {
+      handleCheckNrp(checkNrp);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkNrp]);
 
   return (
     <Modal
@@ -144,12 +202,14 @@ function ModalAddPegawai({ opened, close }: Props) {
             placeholder="Masukan NIP"
             withAsterisk
             {...form.getInputProps("nip")}
+            rightSection={loadCheckNip ? <Loader size="xs" /> : ""}
           />
           <TextInput
             label="NRP"
             placeholder="Masukan NRP"
             withAsterisk
             {...form.getInputProps("nrp")}
+            rightSection={loadCheckNrp ? <Loader size="xs" /> : ""}
           />
         </SimpleGrid>
         <SimpleGrid cols={1} mb="md">
