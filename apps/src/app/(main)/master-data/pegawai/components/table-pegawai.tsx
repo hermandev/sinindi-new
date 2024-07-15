@@ -4,9 +4,11 @@ import React, { useEffect, useState, useTransition } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { getDataPegawai } from "../actions";
 import { IconEdit, IconRefresh } from "@tabler/icons-react";
-import { useAppSelector } from "@/libs/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { modalUpdatePegawai } from "@/libs/redux/reducers/master-data-slice";
 
 function TablePegawai() {
+  const dispatch = useAppDispatch();
   const [data, setData] = useState([]);
   const [isPending, startTransition] = useTransition();
   const modalAdd = useAppSelector((x) => x.masterData.pegawai.add);
@@ -66,7 +68,14 @@ function TablePegawai() {
           </Tooltip>
 
           <Tooltip label="Edit Data" withArrow>
-            <ActionIcon variant="light" color="orange" aria-label="Edit">
+            <ActionIcon
+              variant="light"
+              color="orange"
+              aria-label="Edit"
+              onClick={() =>
+                dispatch(modalUpdatePegawai({ state: true, item: row }))
+              }
+            >
               <IconEdit style={{ width: rem(20) }} stroke={1.5} />
             </ActionIcon>
           </Tooltip>
