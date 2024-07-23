@@ -25,6 +25,7 @@ export const navData = [
     label: "Master Data",
     icon: IconBrandDatabricks,
     links: [
+      { label: "Anggaran", link: "/master-data/anggaran" },
       { label: "Pegawai", link: "/master-data/pegawai" },
       { label: "Pangkat", link: "/master-data/pangkat" },
       { label: "Jabatan", link: "/master-data/jabatan" },

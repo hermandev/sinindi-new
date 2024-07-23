@@ -71,7 +71,44 @@ export async function tambahPegawai(data: {
       id_user: createUser.id,
     });
 
-    revalidatePath("/master-data/pegawai");
+    revalidatePath("/master-data/pegawai", "page");
+    return JSON.stringify({ error: false, message: "Success", data: result });
+  } catch (error) {
+    return JSON.stringify({
+      error: true,
+      message: "NIP Atau NRP Sudah terdaftar",
+      data: error,
+    });
+  }
+}
+
+export async function updatePegawai(data: {
+  id: string;
+  nip: string;
+  nrp: string;
+  nama_lengkap: string;
+  kelamin: string;
+  no_hp: string;
+  pangkat: string;
+  jabatan: string;
+  golongan: string;
+  username: string;
+  password: string;
+}) {
+  try {
+    db.authStore.loadFromCookie(cookies().toString());
+    const result = await db.collection("pegawai").update(data.id, {
+      nip: data.nip,
+      nrp: data.nrp,
+      nama_lengkap: data.nama_lengkap,
+      kelamin: data.kelamin,
+      no_hp: data.no_hp,
+      jabatan: data.jabatan,
+      pangkat: data.pangkat,
+      golongan: data.golongan,
+    });
+
+    revalidatePath("/master-data/pegawai", "page");
     return JSON.stringify({ error: false, message: "Success", data: result });
   } catch (error) {
     return JSON.stringify({

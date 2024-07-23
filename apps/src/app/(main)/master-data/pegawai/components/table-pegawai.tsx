@@ -12,6 +12,7 @@ function TablePegawai() {
   const [data, setData] = useState([]);
   const [isPending, startTransition] = useTransition();
   const modalAdd = useAppSelector((x) => x.masterData.pegawai.add);
+  const modalUpdate = useAppSelector((x) => x.masterData.pegawai.update);
 
   const getData = () => {
     startTransition(async () => {
@@ -29,7 +30,7 @@ function TablePegawai() {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalAdd]);
+  }, [modalAdd, modalUpdate]);
 
   const columns: TableColumn<Pegawai>[] = [
     {

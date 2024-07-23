@@ -17,7 +17,12 @@ import { getDataPangkat } from "../../pangkat/actions";
 import { getDataJabatan } from "../../jabatan/actions";
 import { getDataGolongan } from "../../golongan/actions";
 import { IconDeviceFloppy } from "@tabler/icons-react";
-import { checkNipPegawai, checkNrpPegawai, tambahPegawai } from "../actions";
+import {
+  checkNipPegawai,
+  checkNrpPegawai,
+  tambahPegawai,
+  updatePegawai,
+} from "../actions";
 import { useDebouncedValue } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useAppSelector } from "@/libs/redux/hooks";
@@ -82,7 +87,8 @@ function ModalUpdatePegawai({ opened, close }: Props) {
       }
 
       const result = JSON.parse(
-        await tambahPegawai({
+        await updatePegawai({
+          id: data.id,
           nip: data.nip,
           nrp: data.nrp,
           nama_lengkap: data.nama_lengkap,

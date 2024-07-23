@@ -1,7 +1,8 @@
 import React from "react";
+import AnggaranContainer from "./components/container";
 
 function AnggaranPage() {
-  return <div>AnggaranPage</div>;
+  return <AnggaranContainer />;
 }
 
 export default AnggaranPage;
