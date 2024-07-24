@@ -1,3 +1,6 @@
+"use client";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { modalAddKegiatan } from "@/libs/redux/reducers/kegiatan-slice";
 import {
   Box,
   Button,
@@ -9,8 +12,10 @@ import {
 } from "@mantine/core";
 import { IconClipboardPlus } from "@tabler/icons-react";
 import React from "react";
+import TableKegiatan from "./table-kegiatan";
 
 function KegiatanContainer() {
+  const dispatch = useAppDispatch();
   return (
     <>
       <SimpleGrid p="md">
@@ -21,14 +26,19 @@ function KegiatanContainer() {
               Data Kegiatan Perjalanan Dinas
             </Text>
           </Box>
-          <Button leftSection={<IconClipboardPlus size="1rem" />}>
+          <Button
+            leftSection={<IconClipboardPlus size="1rem" />}
+            onClick={() => dispatch(modalAddKegiatan(true))}
+          >
             Buat Kegiatan
           </Button>
         </Group>
       </SimpleGrid>
       <Divider />
 
-      <SimpleGrid p="md"></SimpleGrid>
+      <SimpleGrid p="md">
+        <TableKegiatan />
+      </SimpleGrid>
     </>
   );
 }

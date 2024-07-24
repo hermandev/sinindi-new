@@ -1,5 +1,7 @@
 "use client";
+import ModalAddKegiatan from "@/app/(main)/kegiatan/components/modal-add-kegiatan";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { modalAddKegiatan } from "@/libs/redux/reducers/kegiatan-slice";
 import {
   modalAddPegawai,
   modalUpdatePegawai,
@@ -20,6 +22,7 @@ const ModalUpdatePegawai = dynamic(
 function ModalProvider({ children }: Readonly<{ children: ReactNode }>) {
   const dispatch = useAppDispatch();
   const masterData = useAppSelector((x) => x.masterData);
+  const kegiatan = useAppSelector((x) => x.kegiatan.kegiatan);
 
   return (
     <>
@@ -38,6 +41,13 @@ function ModalProvider({ children }: Readonly<{ children: ReactNode }>) {
           close={() =>
             dispatch(modalUpdatePegawai({ state: false, item: null }))
           }
+        />
+      )}
+
+      {kegiatan.modalAdd && (
+        <ModalAddKegiatan
+          opened={kegiatan.modalAdd}
+          close={() => dispatch(modalAddKegiatan(false))}
         />
       )}
     </>

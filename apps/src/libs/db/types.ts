@@ -131,6 +131,42 @@ export type BiayaTaksiDD = {
   satuan: string;
   updated: string;
 };
+
+export type Settings = {
+  bendahara: string;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  expand: {
+    provinsi: Provinsi;
+  };
+  id: string;
+  kpa: string;
+  ksbg_renmin: string;
+  provinsi: string;
+  updated: string;
+  waka: string;
+};
+
+export type Kegiatan = {
+  isi_surat: string;
+  kegiatan: string;
+  jenis: string;
+  tgl_berangkat: string;
+  tgl_kembali: string;
+  transportasi: string;
+  no_sprint: string;
+  no_nota: string;
+  no_sppd: string;
+  status: string;
+  provinsi: string;
+  kabupaten: string;
+  expand: {
+    provinsi: Provinsi;
+    kabupaten: Kabupaten;
+  };
+};
+
 export interface Provinsi {
   collectionId: string;
   collectionName: string;

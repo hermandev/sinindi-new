@@ -9,7 +9,7 @@ function VerifikasiContainer() {
           <Box>
             <Title order={3}>Verisikasi</Title>
             <Text size="xs" c="dimmed" fs="italic">
-              Verifikasi Berkas Perjalanan Dinas
+              Verifikasi Kegiatan Perjalanan Dinas
             </Text>
           </Box>
         </Group>
