@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AppShell.Navbar>
         <Navbar />
       </AppShell.Navbar>
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main bg="gray.0">{children}</AppShell.Main>
     </AppShell>
   );
 }

@@ -1,14 +1,32 @@
-import { ActionIcon, Center, Group, Paper, Text, Tooltip } from "@mantine/core";
+import {
+  ActionIcon,
+  Center,
+  Chip,
+  Group,
+  Paper,
+  Text,
+  Tooltip,
+  rem,
+} from "@mantine/core";
 import React, { useEffect, useState, useTransition } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { Kegiatan } from "@/libs/db/types";
 import { getDataKegiatan } from "../actions";
 import moment from "moment";
-import { IconEye, IconTrash } from "@tabler/icons-react";
+import {
+  IconCar,
+  IconEye,
+  IconPlaneTilt,
+  IconSailboat,
+  IconTrash,
+} from "@tabler/icons-react";
+import Link from "next/link";
+import { useAppSelector } from "@/libs/redux/hooks";
 
 function TableKegiatan() {
   const [data, setData] = useState<any[]>([]);
   const [isPending, startTransition] = useTransition();
+  const modalAdd = useAppSelector((x) => x.kegiatan.kegiatan.modalAdd);
 
   const initData = () => {
     startTransition(async () => {
@@ -20,12 +38,49 @@ function TableKegiatan() {
     {
       name: "Kegiatan",
       selector: (item) => item.kegiatan,
+      wrap: true,
     },
     {
       name: "Transportasi",
       width: "150px",
       center: true,
-      selector: (item) => item.transportasi,
+      cell: (item: Kegiatan, _: any) => (
+        <>
+          {item.transportasi === "UDARA" && (
+            <Chip
+              icon={
+                <IconPlaneTilt style={{ width: rem(16), height: rem(16) }} />
+              }
+              variant="light"
+              defaultChecked
+              color="orange"
+            >
+              Udara
+            </Chip>
+          )}
+          {item.transportasi === "LAUT" && (
+            <Chip
+              icon={
+                <IconSailboat style={{ width: rem(16), height: rem(16) }} />
+              }
+              variant="light"
+              defaultChecked
+            >
+              Laut
+            </Chip>
+          )}
+          {item.transportasi === "DARAT" && (
+            <Chip
+              icon={<IconCar style={{ width: rem(16), height: rem(16) }} />}
+              variant="light"
+              defaultChecked
+              color="grape"
+            >
+              Darat
+            </Chip>
+          )}
+        </>
+      ),
     },
 
     {
@@ -37,7 +92,7 @@ function TableKegiatan() {
     },
     {
       name: "Tujuan",
-      width: "150px",
+      width: "200px",
       center: true,
       selector: (item) =>
         item.jenis === "LD"
@@ -48,15 +103,19 @@ function TableKegiatan() {
       name: "Action",
       width: "150px",
       center: true,
-      cell: (item) => (
+      cell: (item: Kegiatan, _: any) => (
         <Group>
           <Tooltip withArrow label="Detail Kegiatan">
-            <ActionIcon variant="light">
+            <ActionIcon
+              variant="light"
+              component={Link}
+              href={`/kegiatan/${item.id}`}
+            >
               <IconEye size="1rem" />
             </ActionIcon>
           </Tooltip>
           <Tooltip withArrow label="Hapus Kegiatan">
-            <ActionIcon color="red" variant="light">
+            <ActionIcon color="red" variant="light" disabled={!item.is_delete}>
               <IconTrash size="1rem" />
             </ActionIcon>
           </Tooltip>
@@ -64,6 +123,11 @@ function TableKegiatan() {
       ),
     },
   ];
+
+  useEffect(() => {
+    initData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalAdd]);
 
   useEffect(() => {
     initData();

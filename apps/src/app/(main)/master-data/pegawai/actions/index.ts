@@ -8,6 +8,8 @@ export async function getDataPegawai() {
   db.authStore.loadFromCookie(cookies().toString());
   const result = await db.collection("pegawai").getFullList({
     sort: "-created",
+    expand: "pangkat,jabatan,golongan",
+    $autoCancel: false,
   });
 
   return result;
@@ -18,7 +20,9 @@ export async function checkNipPegawai(nip: string) {
     db.authStore.loadFromCookie(cookies().toString());
     const result = await db
       .collection("pegawai")
-      .getFirstListItem(`nip="${nip}"`, {});
+      .getFirstListItem(`nip="${nip}"`, {
+        $autoCancel: false,
+      });
     return JSON.stringify({ error: false, data: result });
   } catch (error) {
     return JSON.stringify({ error: true, data: error });
@@ -30,7 +34,9 @@ export async function checkNrpPegawai(nrp: string) {
     db.authStore.loadFromCookie(cookies().toString());
     const result = await db
       .collection("pegawai")
-      .getFirstListItem(`nrp="${nrp}"`, {});
+      .getFirstListItem(`nrp="${nrp}"`, {
+        $autoCancel: false,
+      });
     return JSON.stringify({ error: false, data: result });
   } catch (error) {
     return JSON.stringify({ error: true, data: error });

@@ -8,6 +8,11 @@ export type Pegawai = {
   pangkat: string;
   jabatan: string;
   golongan: string;
+  expand: {
+    pangkat: Pangkat;
+    jabatan: Jabatan;
+    golongan: Golongan;
+  };
 };
 
 export type Pangkat = {
@@ -149,6 +154,7 @@ export type Settings = {
 };
 
 export type Kegiatan = {
+  id: string;
   isi_surat: string;
   kegiatan: string;
   jenis: string;
@@ -165,6 +171,8 @@ export type Kegiatan = {
     provinsi: Provinsi;
     kabupaten: Kabupaten;
   };
+  is_delete: boolean;
+  jumlah_hari: number;
 };
 
 export interface Provinsi {
@@ -183,5 +191,28 @@ export type Kabupaten = {
   id: string;
   nama: string;
   provinsi: string;
+  updated: string;
+};
+
+export type Usulan = {
+  id?: string;
+  pk: string;
+  no: number;
+  jumlah: number;
+  keterangan: string;
+  total_biaya: number;
+  total_bayar: number;
+};
+
+export type PegawaiKegiatan = {
+  id: string;
+  Pegawai: string;
+  kegiatan: string;
+  status: string;
+  expand: {
+    pegawai: Pegawai;
+    kegiatan: Kegiatan;
+  };
+  created: string;
   updated: string;
 };
