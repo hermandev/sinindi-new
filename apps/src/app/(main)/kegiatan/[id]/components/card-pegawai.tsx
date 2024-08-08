@@ -18,6 +18,7 @@ import {
 } from "@mantine/core";
 import { IconFileTypePdf, IconUpload, IconUserPlus } from "@tabler/icons-react";
 import React from "react";
+import PegawaiKegiatan from "./pegawai-kegiatan";
 
 type Props = {
   kegiatan: Kegiatan;
@@ -49,7 +50,9 @@ function CardPegawai({ kegiatan }: Props) {
             </Button>
           </Group>
           <Divider />
-          <Paper p="md">test</Paper>
+          <Paper p="md">
+            <PegawaiKegiatan kegiatan={kegiatan} />
+          </Paper>
         </Paper>
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 4 }}>

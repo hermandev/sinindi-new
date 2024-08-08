@@ -33,7 +33,7 @@ function PageContainer({ id }: Props) {
   }, [id]);
   return (
     <>
-      <Container>
+      <Container size="lg">
         <SimpleGrid p="md">
           <Group justify="space-between">
             <Box>
@@ -52,7 +52,7 @@ function PageContainer({ id }: Props) {
           </Group>
         </SimpleGrid>
       </Container>
-      <Container mt="md">
+      <Container mt="md" size="lg">
         {kegiatan && <CardDetail kegiatan={kegiatan} />}
         {kegiatan && <CardPegawai kegiatan={kegiatan} />}
       </Container>

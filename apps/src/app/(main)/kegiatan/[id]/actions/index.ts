@@ -228,7 +228,7 @@ export async function addPegawaiDalamDaerah({
         pk: pegawaiKegiatan.id,
         jumlah: selisihPenginapan,
         keterangan: "PENGINAPAN",
-        no: 3,
+        no: 2,
         total_biaya: Number(hitungPenginapan),
         total_bayar: Number(hitungPenginapan) * selisihPenginapan,
       },
@@ -236,7 +236,7 @@ export async function addPegawaiDalamDaerah({
         pk: pegawaiKegiatan.id,
         jumlah: 2,
         keterangan: `TRANSPORTASI ${kegiatan.expand?.kabupaten.nama} PP`,
-        no: 4,
+        no: 3,
         total_biaya: Number(hitungTransport),
         total_bayar: Number(hitungTransport) * 2,
       },
@@ -257,4 +257,15 @@ async function saveUsulan(data: Usulan[]) {
   });
 
   return Promise.all(result);
+}
+
+export async function getPegawaiByKegiatan(kegiatan: string) {
+  db.authStore.loadFromCookie(cookies().toString());
+  const result = await db.collection("pegawai_kegiatan").getFullList({
+    filter: `kegiatan="${kegiatan}"`,
+    expand: "pegawai.pangkat, usulan_via_pk",
+    sort: "status,usulan_via_pk.no",
+  });
+
+  return result;
 }

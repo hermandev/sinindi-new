@@ -10,7 +10,7 @@ type Props = {
 
 function CardDetail({ kegiatan }: Props) {
   return (
-    <Paper withBorder p="md" radius="md">
+    <Paper withBorder p="xl" radius="md">
       <Box>
         <Text fw="bolder">Kegiatan</Text>
         <Paper withBorder p="xs" mt="xs" bg="gray.0">
