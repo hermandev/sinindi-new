@@ -66,6 +66,9 @@ export async function createKegiatan(data: {
       jumlah_hari: data.jumlah_hari,
       status: "DRAFT",
       is_delete: true,
+      status_sprint: "DRAFT",
+      status_sppd: "DRAFT",
+      status_nota: "DRAFT",
     };
     const result = await db.collection("kegiatan").create(reqData);
 

@@ -1,10 +1,12 @@
 "use client";
 import ModalAddPegawaiKegiatan from "@/app/(main)/kegiatan/[id]/components/modal-add-pegawai-kegiatan";
+import ModalAddSprint from "@/app/(main)/kegiatan/[id]/components/modal-add-sprint";
 import ModalAddKegiatan from "@/app/(main)/kegiatan/components/modal-add-kegiatan";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   modalAddKegiatan,
   modalAddPegawaiKegiatan,
+  modalAddSprint,
 } from "@/libs/redux/reducers/kegiatan-slice";
 import {
   modalAddPegawai,
@@ -61,6 +63,13 @@ function ModalProvider({ children }: Readonly<{ children: ReactNode }>) {
           close={() =>
             dispatch(modalAddPegawaiKegiatan({ state: false, item: null }))
           }
+        />
+      )}
+
+      {kegiatan.sprint.modalAddSprint && (
+        <ModalAddSprint
+          opened={kegiatan.sprint.modalAddSprint}
+          close={() => dispatch(modalAddSprint({ state: false, item: null }))}
         />
       )}
     </>

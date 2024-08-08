@@ -173,6 +173,12 @@ export type Kegiatan = {
   };
   is_delete: boolean;
   jumlah_hari: number;
+  status_sprint: string;
+  status_sppd: string;
+  status_nota: string;
+  file_sprint: string;
+  file_sppd: string;
+  file_nota: string;
 };
 
 export interface Provinsi {

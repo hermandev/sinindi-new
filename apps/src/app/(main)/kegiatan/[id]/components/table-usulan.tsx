@@ -19,7 +19,7 @@ function TableUsulan({ data }: Props) {
       selector: (row) => row.jumlah,
     },
     {
-      name: "INDEX",
+      name: "INDEKS",
       width: "150px",
       right: true,
       cell: (row: Usulan, _: any) => (

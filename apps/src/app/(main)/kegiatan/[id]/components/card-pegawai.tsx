@@ -1,7 +1,10 @@
 "use client";
 import { Kegiatan } from "@/libs/db/types";
 import { useAppDispatch } from "@/libs/redux/hooks";
-import { modalAddPegawaiKegiatan } from "@/libs/redux/reducers/kegiatan-slice";
+import {
+  modalAddPegawaiKegiatan,
+  modalAddSprint,
+} from "@/libs/redux/reducers/kegiatan-slice";
 import {
   ActionIcon,
   Box,
@@ -16,7 +19,12 @@ import {
   Text,
   Tooltip,
 } from "@mantine/core";
-import { IconFileTypePdf, IconUpload, IconUserPlus } from "@tabler/icons-react";
+import {
+  IconFileTypePdf,
+  IconPlus,
+  IconUpload,
+  IconUserPlus,
+} from "@tabler/icons-react";
 import React from "react";
 import PegawaiKegiatan from "./pegawai-kegiatan";
 
@@ -65,20 +73,61 @@ function CardPegawai({ kegiatan }: Props) {
           <Divider />
           <SimpleGrid p="xs">
             <Paper p="xs" bg="indigo.0">
-              <Group>
+              <Group justify="space-between">
                 <Text fz="xs">SPRINT</Text>
+                {kegiatan.status_sprint === "DRAFT" && (
+                  <Tooltip label="Buat surat perintah" withArrow>
+                    <Button
+                      variant="outline"
+                      color="green"
+                      size="xs"
+                      leftSection={<IconPlus size="1rem" />}
+                      onClick={() =>
+                        dispatch(
+                          modalAddSprint({ state: true, item: kegiatan }),
+                        )
+                      }
+                    >
+                      Buat
+                    </Button>
+                  </Tooltip>
+                )}
               </Group>
             </Paper>
-            <Paper p="xs" bg="indigo.0">
-              <Group>
-                <Text fz="xs">NOTA DINAS</Text>
-              </Group>
-            </Paper>
-            <Paper p="xs" bg="indigo.0">
-              <Group>
-                <Text fz="xs">SPPD</Text>
-              </Group>
-            </Paper>
+            {kegiatan.status_sprint === "DONE" && (
+              <>
+                <Paper p="xs" bg="indigo.0">
+                  <Group justify="space-between">
+                    <Text fz="xs">NOTA DINAS</Text>
+                    {kegiatan.status_nota === "DRAFT" && (
+                      <Button
+                        variant="outline"
+                        color="green"
+                        size="xs"
+                        leftSection={<IconPlus size="1rem" />}
+                      >
+                        Buat
+                      </Button>
+                    )}
+                  </Group>
+                </Paper>
+                <Paper p="xs" bg="indigo.0">
+                  <Group justify="space-between">
+                    <Text fz="xs">SPPD</Text>
+                    {kegiatan.status_sppd === "DRAFT" && (
+                      <Button
+                        variant="outline"
+                        color="green"
+                        size="xs"
+                        leftSection={<IconPlus size="1rem" />}
+                      >
+                        Buat
+                      </Button>
+                    )}
+                  </Group>
+                </Paper>
+              </>
+            )}
           </SimpleGrid>
         </Paper>
 

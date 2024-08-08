@@ -269,3 +269,13 @@ export async function getPegawaiByKegiatan(kegiatan: string) {
 
   return result;
 }
+
+export async function getDasarSprintByKegiatan(kegiatan: string) {
+  db.authStore.loadFromCookie(cookies().toString());
+  const result = await db.collection("dasar_sprint").getFullList({
+    filter: `kegiatan="${kegiatan}"`,
+    sort: "created",
+  });
+
+  return result;
+}

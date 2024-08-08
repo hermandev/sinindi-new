@@ -9,6 +9,10 @@ const initialState = {
     modalAdd: false as boolean,
     item: null as null | Kegiatan,
   },
+  sprint: {
+    modalAddSprint: false as boolean,
+    item: null as null | Kegiatan,
+  },
 };
 
 const kegiatan = createSlice({
@@ -26,8 +30,16 @@ const kegiatan = createSlice({
         state.pegawai.item = action.payload.item;
       }
     },
+
+    modalAddSprint: (state, action) => {
+      if (action) {
+        state.sprint.modalAddSprint = action.payload.state;
+        state.sprint.item = action.payload.item;
+      }
+    },
   },
 });
 
-export const { modalAddKegiatan, modalAddPegawaiKegiatan } = kegiatan.actions;
+export const { modalAddKegiatan, modalAddPegawaiKegiatan, modalAddSprint } =
+  kegiatan.actions;
 export default kegiatan.reducer;
